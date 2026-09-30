@@ -7,12 +7,12 @@ API. It uses only the Python standard library, so there's nothing to install.
 
 ## Summary Card
 
-| # | Section | What I did | Confidence | Files | Time |
-|---|---------|------------|:----------:|-------|------|
-| 1 | Dataset + setup | Chose **Charades v1** (9,848 videos, ~66.5k timestamped action labels). `setup.sh` fetches the 3 MB label zip with plain Python, with no curl, unzip or pip needed. | 5/5 | [setup.sh](setup.sh), [download_data.py](scripts/download_data.py) | ~__ min |
-| 2 | Ingest + summary | Parser for the Charades CSV label format (action triplets, semicolon lists, blank fields). Terminal summary table and per-video detail view. | 5/5 | [loader.py](explorer/loader.py), [cli.py](explorer/cli.py), [run.sh](run.sh) | ~__ min |
-| 3 | Search + filter | In-memory keyword search (all terms must match, `"quoted phrases"`) plus scene / action / object / split / length / verified filters, in both the web UI and the CLI. Per-video action timeline. | 4/5 | [search.py](explorer/search.py), [server.py](explorer/server.py), [static/](explorer/static/) | ~__ min |
-| 4 | README, tests, deploy | This README, 27 unit tests on edge-case fixtures, and `render.yaml` for the optional deploy. | 4/5 | [README.md](README.md), [tests/](tests/), [render.yaml](render.yaml) | ~__ min |
+| #   | Section               | What I did                                                                                                                                                                                       | Confidence | Files                                                                                         | Time |
+| --- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :--------: | --------------------------------------------------------------------------------------------- | ---- |
+| 1   | Dataset + setup       | Chose **Charades v1** (9,848 videos, ~66.5k timestamped action labels). `setup.sh` fetches the 3 MB label zip with plain Python, with no curl, unzip or pip needed.                              |    5/5     | [setup.sh](setup.sh), [download_data.py](scripts/download_data.py)                            |
+| 2   | Ingest + summary      | Parser for the Charades CSV label format (action triplets, semicolon lists, blank fields). Terminal summary table and per-video detail view.                                                     |    5/5     | [loader.py](explorer/loader.py), [cli.py](explorer/cli.py), [run.sh](run.sh)                  |
+| 3   | Search + filter       | In-memory keyword search (all terms must match, `"quoted phrases"`) plus scene / action / object / split / length / verified filters, in both the web UI and the CLI. Per-video action timeline. |    4/5     | [search.py](explorer/search.py), [server.py](explorer/server.py), [static/](explorer/static/) |
+| 4   | README, tests, deploy | This README, 27 unit tests on edge-case fixtures, and `render.yaml` for the optional deploy.                                                                                                     |    4/5     | [README.md](README.md), [tests/](tests/), [render.yaml](render.yaml)                          |
 
 ## Quick start
 
@@ -63,28 +63,28 @@ Why I picked it:
 
 Other datasets I considered in the ~30-minute search:
 
-| Dataset | Why not |
-|---------|---------|
-| Kinetics-700 | One label per clip and little other metadata; the clips are YouTube links, and many have gone offline. |
-| ActivityNet v1.3 | Has temporal segments too, but fewer labels per video and again tied to YouTube links. |
-| AVA | Bounding boxes plus actions, but tied to feature-film frames and much heavier to work with. |
-| UCF101 | The label is just the folder name; nothing else to summarise. |
+| Dataset          | Why not                                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------------------------ |
+| Kinetics-700     | One label per clip and little other metadata; the clips are YouTube links, and many have gone offline. |
+| ActivityNet v1.3 | Has temporal segments too, but fewer labels per video and again tied to YouTube links.                 |
+| AVA              | Bounding boxes plus actions, but tied to feature-film frames and much heavier to work with.            |
+| UCF101           | The label is just the folder name; nothing else to summarise.                                          |
 
 ## The label format
 
 `Charades_v1_train.csv` and `Charades_v1_test.csv` have one row per video:
 
-| Column | Example | Notes |
-|--------|---------|-------|
-| `id` | `YSKX3` | 5-character video ID |
-| `scene` | `Bedroom` | one of 15 rooms, plus "Other" |
-| `quality`, `relevance` | `5`, `6` | 1–7 annotator ratings (sometimes blank) |
-| `verified` | `Yes` | annotator confirmed the video matches the script |
-| `script` | `A person fixes the bed…` | the prompt the actor followed |
-| `objects` | `bed;blanket;pillow` | semicolon-separated |
-| `descriptions` | `A person looks under…;A person is in…` | semicolon-separated, one per annotator |
-| `actions` | `c077 12.10 18.00;c079 11.80 17.30` | `class start end` triplets, in seconds |
-| `length` | `16.62` | seconds |
+| Column                 | Example                                 | Notes                                            |
+| ---------------------- | --------------------------------------- | ------------------------------------------------ |
+| `id`                   | `YSKX3`                                 | 5-character video ID                             |
+| `scene`                | `Bedroom`                               | one of 15 rooms, plus "Other"                    |
+| `quality`, `relevance` | `5`, `6`                                | 1–7 annotator ratings (sometimes blank)          |
+| `verified`             | `Yes`                                   | annotator confirmed the video matches the script |
+| `script`               | `A person fixes the bed…`               | the prompt the actor followed                    |
+| `objects`              | `bed;blanket;pillow`                    | semicolon-separated                              |
+| `descriptions`         | `A person looks under…;A person is in…` | semicolon-separated, one per annotator           |
+| `actions`              | `c077 12.10 18.00;c079 11.80 17.30`     | `class start end` triplets, in seconds           |
+| `length`               | `16.62`                                 | seconds                                          |
 
 `Charades_v1_classes.txt` maps each class code to its name, one `<code> <name>` pair per line.
 
@@ -159,8 +159,6 @@ tests/                    unit tests + small fixture dataset
 ```
 
 ## Reflections
-
-<!-- TODO(Akshat): rewrite both answers in your own words before submitting. -->
 
 **What would I improve with two more hours?**
 Search is plain substring matching. I'd switch to a small inverted index with
