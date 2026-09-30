@@ -1,0 +1,10 @@
+# Optional deployment on Render's free tier (render.com -> New -> Blueprint -> pick this repo).
+# The build step runs the same setup script as a local install, so no extra config is needed.
+services:
+  - type: web
+    name: charades-explorer
+    runtime: python
+    plan: free
+    buildCommand: bash setup.sh
+    startCommand: bash run.sh
+    healthCheckPath: /healthz
