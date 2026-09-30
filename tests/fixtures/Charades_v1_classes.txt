@@ -1,0 +1,5 @@
+c000 Holding some clothes
+c001 Putting clothes somewhere
+c002 Taking a cup from somewhere
+c003 Drinking from a cup
+c004 Opening a door

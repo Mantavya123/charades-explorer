@@ -1,0 +1,4 @@
+id,subject,scene,quality,relevance,verified,script,objects,descriptions,actions,length
+AAA01,S001,Kitchen,6,7,Yes,"A person takes a cup, then drinks from it.",cup;table,A person drinks from a cup.;Someone is drinking coffee in the kitchen.,c002 0.00 4.50;c003 3.00 12.00,12.40
+AAA02,S002,Entryway (A hall that is generally located at the entrance of a house),,5,No,A person opens the door.,door,A person opens a door and walks out.,c004 1.00 6.00;c999 2.00 3.00,8.00
+AAA03,S001,Bedroom,4,6,Yes,A person folds clothes on the bed.,bed;clothes,Someone folds clothes.,c000 0.00 10.00;c001 9.00 21.50,20.00

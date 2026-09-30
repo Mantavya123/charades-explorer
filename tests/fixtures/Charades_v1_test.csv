@@ -1,0 +1,3 @@
+id,subject,scene,quality,relevance,verified,script,objects,descriptions,actions,length
+BBB01,S003,Living room,7,7,Yes,A person sits on the sofa.,sofa,A person sits down on a sofa.,,15.25
+BBB02,S004,Kitchen,5,4,Yes,A person puts clothes away.,clothes;cup,A person puts clothes in a cupboard.,c001 2.00 8.00;c002 broken;c003 5.00 9.00,30.00
