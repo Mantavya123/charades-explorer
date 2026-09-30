@@ -1,19 +1,25 @@
 #!/usr/bin/env bash
-# Print a summary table of the Charades labels.
+# Start the Charades Explorer.
 #
 # Usage:
-#   ./run.sh                    # summary table (first 20 videos)
-#   ./run.sh --limit 50
-#   ./run.sh --id YSKX3         # full labels for one video
-#   ./run.sh --test             # run the unit tests
+#   ./run.sh                      # web UI at http://localhost:8000 (PORT=9000 ./run.sh to change)
+#   ./run.sh --cli [options]      # summary table in the terminal (./run.sh --cli --help)
+#   ./run.sh --test               # run the unit tests
 set -euo pipefail
 cd "$(dirname "$0")"
 
 source scripts/find_python.sh
 find_python
 
-if [[ "${1:-}" == "--test" ]]; then
-  exec "$PYTHON" -m unittest discover -s tests -t . -v
-fi
-
-exec "$PYTHON" -m explorer.cli "$@"
+case "${1:-}" in
+  --cli)
+    shift
+    exec "$PYTHON" -m explorer.cli "$@"
+    ;;
+  --test)
+    exec "$PYTHON" -m unittest discover -s tests -t . -v
+    ;;
+  *)
+    exec "$PYTHON" -m explorer.server "$@"
+    ;;
+esac

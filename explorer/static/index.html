@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Charades Explorer</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>Charades Explorer</h1>
+      <p class="stats" id="stats">Loading dataset…</p>
+    </div>
+  </header>
+
+  <form class="filters" id="filters" autocomplete="off">
+    <label class="field grow">
+      <span>Search</span>
+      <input type="search" name="q" id="q" placeholder='Labels, scripts, objects… e.g. "drinking from a cup" kitchen'>
+    </label>
+    <label class="field">
+      <span>Scene</span>
+      <select name="scene" id="scene"><option value="">All scenes</option></select>
+    </label>
+    <label class="field">
+      <span>Action</span>
+      <select name="action" id="action"><option value="">All actions</option></select>
+    </label>
+    <label class="field">
+      <span>Object</span>
+      <select name="object" id="object"><option value="">All objects</option></select>
+    </label>
+    <label class="field">
+      <span>Split</span>
+      <select name="split" id="split"><option value="">Train + test</option></select>
+    </label>
+    <div class="field">
+      <span>Length (s)</span>
+      <div class="range">
+        <input type="number" name="min_length" min="0" step="1" placeholder="min" aria-label="Minimum length in seconds">
+        <span aria-hidden="true">–</span>
+        <input type="number" name="max_length" min="0" step="1" placeholder="max" aria-label="Maximum length in seconds">
+      </div>
+    </div>
+    <label class="field check">
+      <input type="checkbox" name="verified" value="1">
+      <span>Verified only</span>
+    </label>
+    <button type="reset" class="btn-ghost">Reset</button>
+  </form>
+
+  <main>
+    <div class="result-bar">
+      <p id="summary" aria-live="polite"></p>
+      <div class="pager">
+        <label class="sort">
+          <span>Sort</span>
+          <!-- Outside the <form> visually, but still part of it via form="filters". -->
+          <select name="sort" id="sort" form="filters">
+            <option value="id">ID</option>
+            <option value="longest">Longest first</option>
+            <option value="shortest">Shortest first</option>
+            <option value="most-actions">Most actions</option>
+            <option value="fewest-actions">Fewest actions</option>
+          </select>
+        </label>
+        <button type="button" id="prev" class="btn-ghost">← Prev</button>
+        <span id="page"></span>
+        <button type="button" id="next" class="btn-ghost">Next →</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th><th>Scene</th><th class="num">Length</th>
+            <th>Action labels</th><th>Objects</th><th>Split</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <p class="empty" id="empty" hidden>No videos match these filters.</p>
+    </div>
+  </main>
+
+  <aside class="panel" id="panel" hidden aria-labelledby="panel-title">
+    <div class="panel-head">
+      <h2 id="panel-title"></h2>
+      <button type="button" class="btn-ghost" id="close" aria-label="Close details">✕</button>
+    </div>
+    <div class="panel-body" id="panel-body"></div>
+  </aside>
+
+  <script src="/app.js"></script>
+</body>
+</html>
