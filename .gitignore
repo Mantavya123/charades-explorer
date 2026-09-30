@@ -1,0 +1,7 @@
+# Dataset files are downloaded by setup.sh. The Charades license doesn't allow
+# redistributing them, so they must never be committed.
+data/
+
+__pycache__/
+*.pyc
+.DS_Store
